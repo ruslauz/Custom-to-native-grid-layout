@@ -1,8 +1,10 @@
-import { DragEvent, useState } from "react";
+import { DragEvent, useEffect, useState } from "react";
 import Card from '@semcore/ui/card'
 import { Box, Flex } from '@semcore/ui/flex-box'
 import Button from '@semcore/ui/button'
 import TrashM from '@semcore/ui/icon/Trash/m'
+import Switch from '@semcore/ui/switch'
+import { Text } from '@semcore/ui/typography'
 import RGL, { Layout, WidthProvider } from "react-grid-layout";
 
 import "@semcore/ui/utils/style/var.css"
@@ -18,6 +20,9 @@ const rGLHandles = ["s", "w", "e", "sw", "se"] as Layout['resizeHandles'];
 function App() {
   const [isWidgetDragging, setWidgetDragging] = useState<boolean>(false);
   const [layout, setLayout] = useState<Layout[]>([]);
+  const [verticalCompact, setVerticalCompact] = useState(true)
+
+  const gridRows = Math.max(...layout.map(item => item.y + item.h))
 
   const handleDragEnd = () => {
     setWidgetDragging(false);
@@ -83,13 +88,27 @@ function App() {
             tag={Flex}
             className={classes.layoutInfoBody}
           >
-            {layout.length > 0 ?
+            <Flex direction="column" gap={1} alignItems="center">
+              <Text tag="label" size={200} htmlFor="email-subscription">
+                Vertical Compact
+              </Text>
+
+              <Switch size="l" theme="success">
+                <Switch.Addon>Off</Switch.Addon>
+                <Switch.Value
+                  checked={verticalCompact}
+                  onChange={setVerticalCompact}
+                />
+                <Switch.Addon>On</Switch.Addon>
+              </Switch>
+            </Flex>
+            {/* {layout.length > 0 ?
               JSON.stringify(layout, ['x', 'y', 'w', 'h'], 2) :
               (
                 <Flex className={classes.layInfoText}>
                   Layout
                 </Flex>
-              )}
+              )} */}
           </Card.Body>
         </Card>
       </Flex>
@@ -101,17 +120,18 @@ function App() {
               isBounded
               isDroppable
               useCSSTransforms
-              verticalCompact={false}
+              verticalCompact={verticalCompact}
               layout={layout}
               className={classes.gridLayout}
-              onDrop={handleDrop}
-              onDropDragOver={handleDropDragOver}
-              onLayoutChange={handleLayoutChange}
               cols={12}
               rowHeight={43}
               margin={rGLMargin}
               resizeHandles={rGLHandles}
               containerPadding={rGLPadding}
+              onDrop={handleDrop}
+              onDropDragOver={handleDropDragOver}
+              onLayoutChange={handleLayoutChange}
+
             >
               {
                 layout.map(({ i }) => {
@@ -134,7 +154,10 @@ function App() {
         </Card>
 
         <Card tag={Flex} className={classes.nativeGrid}>
-          <Card.Body tag={Box} className={classes.nativeGridBody}>
+          <Card.Body
+            tag={Box} className={classes.nativeGridBody}
+            /* aut0-fill property does not fit our needs */
+            style={{ gridTemplateRows: `repeat(${gridRows}, 43px)` }}>
             {layout.map(({ i, x, y, w, h }) => {
               return (
                 <Card

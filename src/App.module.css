@@ -40,19 +40,21 @@ div.layoutInfoBody {
 }
 
 .layOuts {
-    flex: 1 1 auto;
     width: 100%;
     gap: 16px;
     justify-content: space-between;
 }
 
 div.customGrid {
+    flex-direction: column;
     flex: 0 0 auto;
+    gap: 16px;
 }
 
 div.customGridBody {
-    width: 724px;
+    width: 723px;
     padding: 0;
+    min-height: 967px;
 }
 
 div.gridLayout {
@@ -75,15 +77,18 @@ div.rglItem {
 
 div.nativeGrid {
     flex: 0 0 auto;
+    width: 723px;
+    overflow: hidden;
+    flex-direction: column;
+    gap: 16px;
+    height: 967px;
 }
 
 div.nativeGridBody {
     display: grid;
     gap: 16px;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(auto-fill, 43px);
-    height: 100%;
-    width: 724px;
+    width: 723px;
     padding: 0;
 }
 
