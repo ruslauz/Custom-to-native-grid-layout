@@ -1,4 +1,4 @@
-import { DragEvent, useEffect, useState } from "react";
+import { DragEvent, useState } from "react";
 import Card from '@semcore/ui/card'
 import { Box, Flex } from '@semcore/ui/flex-box'
 import Button from '@semcore/ui/button'
