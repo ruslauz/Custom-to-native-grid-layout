@@ -22,9 +22,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install
-        - run: npm install -g bun
-        - run: bun install
+      - name: Install bun
+        run: npm install -g bun
+        
+      - name: Install deps
+        run: bun install
+        
 
       - name: Build
         run: bun run build
