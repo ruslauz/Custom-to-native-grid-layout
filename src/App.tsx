@@ -134,7 +134,7 @@ function App() {
         </Card>
 
         <Card tag={Flex} className={classes.nativeGrid}>
-          <Card.Body tag={Box} className={classes.customGridBody}>
+          <Card.Body tag={Box} className={classes.nativeGridBody}>
             {layout.map(({ i, x, y, w, h }) => {
               return (
                 <Card
