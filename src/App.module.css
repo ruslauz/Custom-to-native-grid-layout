@@ -14,7 +14,7 @@
     width: 100%;
 }
 
-.draggable {
+div.draggable {
     width: 180px;
     height: 160px;
     background: var(--blue-200);
@@ -87,7 +87,7 @@
     padding: 0;
 }
 
-.nativeGridItem {
+div.nativeGridItem {
     background: var(--blue-100);
 }
 
