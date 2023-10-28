@@ -141,7 +141,7 @@ function App() {
                         tag={Flex}
                         className={classes.rglItem}
                       >
-                        <Button onClick={() => setLayout(prev => prev.filter(item => item.i !== i))}>
+                        <Button onClick={() => setLayout(prev => prev.filter(item => item.i !== i))} w={28}>
                           <TrashM />
                         </Button>
                       </Card.Body>
